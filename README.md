@@ -18,10 +18,7 @@ The entire pipeline — SLAM, map merging, frontier detection, allocation, colli
 
 ## Demo
 
-<!-- Replace the line below with your actual video/gif once ready -->
-<video src="./demo.mp4" width="100%" controls>
-  Your browser does not support the video tag or cannot play this video.
-</video>
+📹 [Watch the full demo (2:26)](https://drive.google.com/file/d/1lEP7NpHFpeeWvuvuNTFM5j306QYYHAMQ/view?usp=sharing)
 
 ## Key Features
 
@@ -61,17 +58,6 @@ A few design details that go beyond a textbook Hungarian + ORCA integration:
 - **Self-expiring blacklist and reached memory** — frontiers that repeatedly fail are temporarily blacklisted, and recently completed ones are temporarily excluded from re-assignment, both with TTL-based expiry so the system doesn't create permanent dead zones on the map.
 - **Reactive (not continuous) ORCA intervention** — the ORCA/RVO2 safety layer only overrides Nav2's commanded velocity when robots are within a proximity-and-closing-velocity condition; otherwise Nav2's planned trajectory passes through untouched. This keeps ORCA from constantly perturbing paths that were never actually going to collide.
 - **Deadlock-breaking bias** — a directional bias term is added to each robot's preferred velocity during an ORCA intervention specifically to break symmetric face-off deadlocks (robots heading straight at each other), plus a stall-recovery fallback so the safety layer can't leave a robot frozen in place.
-
-## Repository Structure
-hermes/
-├── hermes_bringup/  
-├── map_merge/               --> Multi-robot map merging (m-explore-ros2)
-├── frontier_detector/       --> Tuned frontier_exploration_ros2 configuration
-├── frontier_allocator/      --> Hungarian allocator (frontier_alg) + goal dispatch (frontier_pub)
-├── orca/         --> ORCA/RVO2 bridge (orca_turtlebot_bridge_node)
-├── nav2_start/              --> Nav2 params, RPP planner configuration
-└── spawn_bots/       --> Robot URDF/SDF + simulation assets
-
 
 ## Prerequisites
 
